@@ -12,7 +12,8 @@ public class ShowingValues {
 			//Uses method that adds both 2d arrays to model (MinesweeperTable Class)
 		//Uses method for blank squares
 			//Uses the CheckingTable Class method for blank squares
-				//Uses method that adds both 2d arrays to model (MinesweeperTable Class)
+				//Uses method that adds both 2d arrays to model and session
+					//(MinesweeperTable Class)
 	
 	//Method to change all boolean values to true if player loses
 		//Parameter is session
