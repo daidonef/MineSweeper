@@ -53,33 +53,48 @@ public class MinesweeperTable {
 			for (int j = 0; j < mineSweeper[i].length; j++) {
 				if (mineSweeper[i][j] == 10) {
 					if (i - 1 >= 0) {
-						mineSweeper[i-1][j]++;
+						if (mineSweeper[i-1][j] < 10) {
+							mineSweeper[i-1][j]++;
+						}
 						if (j - 1 >= 0) {
-							mineSweeper[i-1][j-1]++;
+							if (mineSweeper[i-1][j-1] < 10) {
+								mineSweeper[i-1][j-1]++;
+							}
 						}
 						if (j + 1 < mineSweeper[i].length) {
-							mineSweeper[i-1][j+1]++;
+							if (mineSweeper[i-1][j+1] < 10) {
+								mineSweeper[i-1][j+1]++;
+							}
 						}
 					}
 					if (i + 1 < mineSweeper.length) {
-						mineSweeper[i+1][j]++;
+						if (mineSweeper[i+1][j] < 10) {
+							mineSweeper[i+1][j]++;
+						}
 						if (j - 1 >= 0) {
-							mineSweeper[i+1][j-1]++;
+							if (mineSweeper[i+1][j-1] < 10) {
+								mineSweeper[i+1][j-1]++;
+							}
 						}
 						if (j + 1 < mineSweeper[i].length) {
-							mineSweeper[i+1][j+1]++;
+							if (mineSweeper[i+1][j+1] < 10) {
+								mineSweeper[i+1][j+1]++;
+							}
 						}
 					}
 					if (j - 1 >= 0) {
-						mineSweeper[i][j-1]++;
+						if (mineSweeper[i][j-1] < 10) {
+							mineSweeper[i][j-1]++;
+						}
 					}
 					if (j + 1 < mineSweeper[i].length) {
-						mineSweeper[i][j+1]++;
+						if (mineSweeper[i][j+1] < 10) {
+							mineSweeper[i][j+1]++;
+						}
 					}
 				}
 			}
 		}
-		
 		return mineSweeper;
 	}
 	
