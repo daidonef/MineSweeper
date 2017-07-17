@@ -8,6 +8,7 @@
 <h1>
 	Minesweeper  
 </h1>
+<p>${result }</p>
 <!-- Create bottoms for each to send information to the HomeController -->
 	<table>
 		<c:forEach items="${mineSweeper }" var="i" varStatus="status1">
@@ -30,7 +31,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<!-- For testing -->
-	<p>${testing1 }<br>${testing2 }</p>
 </body>
 </html>
