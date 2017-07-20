@@ -46,13 +46,7 @@ public class ShowingValues {
 		session.setAttribute("showingMS", showingMS);
 	}
 	
-	//Method to change boolean values for the blank squares that are next to each other up
-		//until a number is shown
-		//Parameter is session
-		//For loop to check the 2d array with numbers to change using for loop the 2d array
-			//with boolean values
-			//(Might use the method below the one to change the boolean values)
-		//Change the session of that 2d array and return that 2d array
+	//Method to change boolean values for the blank squares that are next to each other
 	private static void changingForZero(HttpServletRequest request, HttpSession session) {
 		
 		int[][] mineSweeper = (int[][]) session.getAttribute("mineSweeper");
@@ -62,10 +56,54 @@ public class ShowingValues {
 		
 		//Need to work on changing the boolean values in showingMS to true up until
 		//there is no more zeros.
-		//Need to use two for loops and have the inner for loop break if value is
-		//greater than 0
-		//The outer for loop would start the inner again at i++.
-		//Need to make sure array does not go out of bounds with if statements
+		//Need to work on going through i
+		//Need to clean up this code
+		for (int i = 0; i < showingMS.length; i++) {
+			for (int j = 0; j < showingMS[i].length; j++) {
+				if (index1 - i >= 0 && index2 - j >= 0) {
+					if (mineSweeper[index1 - i][index2 - j] == 10) {
+						break;
+					}
+					showingMS[index1 - i][index2 - j] = true;
+					if (mineSweeper[index1 - i][index2 - j] > 0) {
+						break;
+					}
+				}
+			}
+			for (int j = 0; j < showingMS[i].length; j++) {
+				if (index1 - i >= 0 && index2 + j < showingMS[i].length) {
+					if (mineSweeper[index1 - i][index2 + j] == 10) {
+						break;
+					}
+					showingMS[index1 - i][index2 + j] = true;
+					if (mineSweeper[index1 - i][index2 + j] > 0) {
+						break;
+					}
+				}
+			}
+			for (int j = 0; j < showingMS[i].length; j++) {
+				if (index1 + i < showingMS.length && index2 - j >= 0) {
+					if (mineSweeper[index1 + i][index2 - j] == 10) {
+						break;
+					}
+					showingMS[index1 + i][index2 - j] = true;
+					if (mineSweeper[index1 + i][index2 - j] > 0) {
+						break;
+					}
+				}
+			}
+			for (int j = 0; j < showingMS[i].length; j++) {
+				if (index1 + i < showingMS.length && index2 + j < showingMS[i].length) {
+					if (mineSweeper[index1 + i][index2 + j] == 10) {
+						break;
+					}
+					showingMS[index1 + i][index2 + j] = true;
+					if (mineSweeper[index1 + i][index2 + j] > 0) {
+						break;
+					}
+				}
+			}
+		}
 		
 		session.setAttribute("showingMS", showingMS);
 	}

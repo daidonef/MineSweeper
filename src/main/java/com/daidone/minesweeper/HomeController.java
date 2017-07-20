@@ -23,9 +23,7 @@ public class HomeController {
 		HttpSession session = request.getSession(true);
 		
 		//Random minesweep table generated on first load of page
-			//Uses method in the MinesweeperTable Class
-			//Use sessions to make sure this is only generated once.
-		if (session.getAttribute("mineSweeper") == null) {
+		if (request.getParameter("index1") == null) {
 			MinesweeperTable.generatingMSTable(model, session);
 		} else {
 			//After first load will use that table and user input to see if player loses or not
