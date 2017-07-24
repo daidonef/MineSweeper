@@ -54,10 +54,7 @@ public class ShowingValues {
 		int index1 = Integer.parseInt(request.getParameter("index1"));
 		int index2 = Integer.parseInt(request.getParameter("index2"));
 		
-		//Need to work on changing the boolean values in showingMS to true up until
-		//there is no more zeros.
-		//Need to work on going through i
-		//Need to clean up this code
+		//Checks zeros until it gets to a higher number following the column for each row.
 		for (int i = 0; i < showingMS.length; i++) {
 			for (int j = 0; j < showingMS[i].length; j++) {
 				if (index1 - i >= 0 && index2 - j >= 0) {
@@ -93,6 +90,53 @@ public class ShowingValues {
 				}
 			}
 			for (int j = 0; j < showingMS[i].length; j++) {
+				if (index1 + i < showingMS.length && index2 + j < showingMS[i].length) {
+					if (mineSweeper[index1 + i][index2 + j] == 10) {
+						break;
+					}
+					showingMS[index1 + i][index2 + j] = true;
+					if (mineSweeper[index1 + i][index2 + j] > 0) {
+						break;
+					}
+				}
+			}
+		}
+		//Checks zeros until it gets to a higher number following the row for each column
+		for (int j = 0; j < showingMS.length; j++) {
+			for (int i = 0; i < showingMS[j].length; i++) {
+				if (index1 - i >= 0 && index2 - j >= 0) {
+					if (mineSweeper[index1 - i][index2 - j] == 10) {
+						break;
+					}
+					showingMS[index1 - i][index2 - j] = true;
+					if (mineSweeper[index1 - i][index2 - j] > 0) {
+						break;
+					}
+				}
+			}
+			for (int i = 0; i < showingMS[j].length; i++) {
+				if (index1 - i >= 0 && index2 + j < showingMS[i].length) {
+					if (mineSweeper[index1 - i][index2 + j] == 10) {
+						break;
+					}
+					showingMS[index1 - i][index2 + j] = true;
+					if (mineSweeper[index1 - i][index2 + j] > 0) {
+						break;
+					}
+				}
+			}
+			for (int i = 0; i < showingMS[j].length; i++) {
+				if (index1 + i < showingMS.length && index2 - j >= 0) {
+					if (mineSweeper[index1 + i][index2 - j] == 10) {
+						break;
+					}
+					showingMS[index1 + i][index2 - j] = true;
+					if (mineSweeper[index1 + i][index2 - j] > 0) {
+						break;
+					}
+				}
+			}
+			for (int i = 0; i < showingMS[j].length; i++) {
 				if (index1 + i < showingMS.length && index2 + j < showingMS[i].length) {
 					if (mineSweeper[index1 + i][index2 + j] == 10) {
 						break;

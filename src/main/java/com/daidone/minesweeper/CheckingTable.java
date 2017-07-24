@@ -27,11 +27,15 @@ public class CheckingTable {
 		
 		int[][] mineSweeper = (int[][]) session.getAttribute("mineSweeper");
 		boolean[][] showingMS = (boolean[][]) session.getAttribute("showingMS");
+		showingMS [Integer.parseInt(request.getParameter("index1"))][Integer.parseInt(
+				request.getParameter("index2"))] = true;
 		
 		for(int i = 0; i < mineSweeper.length; i++) {
 			for(int j = 0; j <mineSweeper[i].length; j++) {
-				if (showingMS[i][j] == false && mineSweeper[i][j] <= 10) {
-					return false;
+				if (showingMS[i][j] == false) {
+					if (mineSweeper[i][j] < 10) {
+						return false;
+					}
 				}
 			}
 		}
