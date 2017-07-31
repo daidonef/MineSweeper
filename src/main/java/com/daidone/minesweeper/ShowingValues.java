@@ -47,6 +47,7 @@ public class ShowingValues {
 	}
 	
 	//Method to change boolean values for the blank squares that are next to each other
+	//Need to refine code so it only gets the zeros it should every time.
 	private static void changingForZero(HttpServletRequest request, HttpSession session) {
 		
 		int[][] mineSweeper = (int[][]) session.getAttribute("mineSweeper");
@@ -58,21 +59,15 @@ public class ShowingValues {
 		for (int i = 0; i < showingMS.length; i++) {
 			for (int j = 0; j < showingMS[i].length; j++) {
 				if (index1 - i >= 0 && index2 - j >= 0) {
-					if (mineSweeper[index1 - i][index2 - j] == 10) {
-						break;
-					}
-					showingMS[index1 - i][index2 - j] = true;
+					showingMS = changingZerosMinusMinus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 - i][index2 - j] > 0) {
 						break;
 					}
 				}
 			}
 			for (int j = 0; j < showingMS[i].length; j++) {
-				if (index1 - i >= 0 && index2 + j < showingMS[i].length) {
-					if (mineSweeper[index1 - i][index2 + j] == 10) {
-						break;
-					}
-					showingMS[index1 - i][index2 + j] = true;
+				if (index1 - i >= 0 && index2 + j < mineSweeper[i].length) {
+					showingMS = changingZerosMinusPlus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 - i][index2 + j] > 0) {
 						break;
 					}
@@ -80,21 +75,15 @@ public class ShowingValues {
 			}
 			for (int j = 0; j < showingMS[i].length; j++) {
 				if (index1 + i < showingMS.length && index2 - j >= 0) {
-					if (mineSweeper[index1 + i][index2 - j] == 10) {
-						break;
-					}
-					showingMS[index1 + i][index2 - j] = true;
+					showingMS = changingZerosPlusMinus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 + i][index2 - j] > 0) {
 						break;
 					}
 				}
 			}
 			for (int j = 0; j < showingMS[i].length; j++) {
-				if (index1 + i < showingMS.length && index2 + j < showingMS[i].length) {
-					if (mineSweeper[index1 + i][index2 + j] == 10) {
-						break;
-					}
-					showingMS[index1 + i][index2 + j] = true;
+				if (index1 + i < mineSweeper.length && index2 + j < mineSweeper[i].length) {
+					showingMS = changingZerosPlusPlus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 + i][index2 + j] > 0) {
 						break;
 					}
@@ -105,21 +94,15 @@ public class ShowingValues {
 		for (int j = 0; j < showingMS.length; j++) {
 			for (int i = 0; i < showingMS[j].length; i++) {
 				if (index1 - i >= 0 && index2 - j >= 0) {
-					if (mineSweeper[index1 - i][index2 - j] == 10) {
-						break;
-					}
-					showingMS[index1 - i][index2 - j] = true;
+					showingMS = changingZerosMinusMinus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 - i][index2 - j] > 0) {
 						break;
 					}
 				}
 			}
 			for (int i = 0; i < showingMS[j].length; i++) {
-				if (index1 - i >= 0 && index2 + j < showingMS[i].length) {
-					if (mineSweeper[index1 - i][index2 + j] == 10) {
-						break;
-					}
-					showingMS[index1 - i][index2 + j] = true;
+				if (index1 - i >= 0 && index2 + j < mineSweeper[i].length) {
+					showingMS = changingZerosMinusPlus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 - i][index2 + j] > 0) {
 						break;
 					}
@@ -127,21 +110,15 @@ public class ShowingValues {
 			}
 			for (int i = 0; i < showingMS[j].length; i++) {
 				if (index1 + i < showingMS.length && index2 - j >= 0) {
-					if (mineSweeper[index1 + i][index2 - j] == 10) {
-						break;
-					}
-					showingMS[index1 + i][index2 - j] = true;
+					showingMS = changingZerosPlusMinus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 + i][index2 - j] > 0) {
 						break;
 					}
 				}
 			}
 			for (int i = 0; i < showingMS[j].length; i++) {
-				if (index1 + i < showingMS.length && index2 + j < showingMS[i].length) {
-					if (mineSweeper[index1 + i][index2 + j] == 10) {
-						break;
-					}
-					showingMS[index1 + i][index2 + j] = true;
+				if (index1 + i < mineSweeper.length && index2 + j < mineSweeper[i].length) {
+					showingMS = changingZerosPlusPlus(index1, index2, i, j, mineSweeper, showingMS);
 					if (mineSweeper[index1 + i][index2 + j] > 0) {
 						break;
 					}
@@ -161,6 +138,138 @@ public class ShowingValues {
 				request.getParameter("index2"))] = true;
 		
 		session.setAttribute("showingMS", showingMS);
+	}
+	
+	private static boolean[][] changingZerosPlusPlus(int index1, int index2, int i, int j,
+			int[][] mineSweeper, boolean[][] showingMS) {
+		
+		if (mineSweeper[index1 + i][index2 + j] == 0) {
+			showingMS[index1 + i][index2 + j] = true;
+			if (index1 + i + 1 < mineSweeper.length) {
+				showingMS[index1 + i + 1][index2 + j] = true;
+			}
+			if (index1 + i + 1 < mineSweeper.length && index2 + j + 1 < mineSweeper[i].length) {
+				showingMS[index1 + i + 1][index2 + j + 1] = true;
+			}
+			if (index1 + i + 1 < mineSweeper.length && index2 + j - 1 >= 0) {
+				showingMS[index1 + i + 1][index2 + j - 1] = true;
+			}
+			if (index1 + i - 1 >= 0) {
+				showingMS[index1 + i - 1][index2 + j] = true;
+			}
+			if (index1 + i - 1 >= 0 && index2 + j + 1 < mineSweeper[i].length) {
+				showingMS[index1 + i - 1][index2 + j + 1] = true;
+			}
+			if (index1 + i - 1 >= 0 && index2 + j - 1 >= 0) {
+				showingMS[index1 + i - 1][index2 + j - 1] = true;
+			}
+			if (index2 + j + 1 < mineSweeper[i].length) {
+				showingMS[index1 + i][index2 + j + 1] = true;
+			}
+			if (index2 + j - 1 >= 0) {
+				showingMS[index1 + i][index2 + j - 1] = true;
+			}
+		}
+		return showingMS;
+	}
+	
+	private static boolean[][] changingZerosPlusMinus(int index1, int index2, int i, int j,
+			int[][] mineSweeper, boolean[][] showingMS) {
+		
+		if (mineSweeper[index1 + i][index2 - j] == 0) {
+			showingMS[index1 + i][index2 - j] = true;
+			if (index1 + i + 1 < mineSweeper.length) {
+				showingMS[index1 + i + 1][index2 - j] = true;
+			}
+			if (index1 + i + 1 < mineSweeper.length && index2 - j + 1 < mineSweeper[i].length) {
+				showingMS[index1 + i + 1][index2 - j + 1] = true;
+			}
+			if (index1 + i + 1 < mineSweeper.length && index2 - j - 1 >= 0) {
+				showingMS[index1 + i + 1][index2 - j - 1] = true;
+			}
+			if (index1 + i - 1 >= 0) {
+				showingMS[index1 + i - 1][index2 - j] = true;
+			}
+			if (index1 + i - 1 >= 0 && index2 - j + 1 < mineSweeper[i].length) {
+				showingMS[index1 + i - 1][index2 - j + 1] = true;
+			}
+			if (index1 + i - 1 >= 0 && index2 - j - 1 >= 0) {
+				showingMS[index1 + i - 1][index2 - j - 1] = true;
+			}
+			if (index2 - j + 1 < mineSweeper[i].length) {
+				showingMS[index1 + i][index2 - j + 1] = true;
+			}
+			if (index2 - j - 1 >= 0) {
+				showingMS[index1 + i][index2 - j - 1] = true;
+			}
+		}
+		return showingMS;
+	}
+	
+	private static boolean[][] changingZerosMinusPlus(int index1, int index2, int i, int j,
+			int[][] mineSweeper, boolean[][] showingMS) {
+		
+		if (mineSweeper[index1 - i][index2 + j] == 0) {
+			showingMS[index1 - i][index2 + j] = true;
+			if (index1 - i + 1 < mineSweeper.length) {
+				showingMS[index1 - i + 1][index2 + j] = true;
+			}
+			if (index1 - i + 1 < mineSweeper.length && index2 + j + 1 < mineSweeper[i].length) {
+				showingMS[index1 - i + 1][index2 + j + 1] = true;
+			}
+			if (index1 - i + 1 < mineSweeper.length && index2 + j - 1 >= 0) {
+				showingMS[index1 - i + 1][index2 + j - 1] = true;
+			}
+			if (index1 - i - 1 >= 0) {
+				showingMS[index1 - i - 1][index2 + j] = true;
+			}
+			if (index1 - i - 1 >= 0 && index2 + j + 1 < mineSweeper[i].length) {
+				showingMS[index1 - i - 1][index2 + j + 1] = true;
+			}
+			if (index1 - i - 1 >= 0 && index2 + j - 1 >= 0) {
+				showingMS[index1 - i - 1][index2 + j - 1] = true;
+			}
+			if (index2 + j + 1 < mineSweeper[i].length) {
+				showingMS[index1 - i][index2 + j + 1] = true;
+			}
+			if (index2 + j - 1 >= 0) {
+				showingMS[index1 - i][index2 + j - 1] = true;
+			}
+		}
+		return showingMS;
+	}
+	
+	private static boolean[][] changingZerosMinusMinus(int index1, int index2, int i, int j,
+			int[][] mineSweeper, boolean[][] showingMS) {
+		
+		if (mineSweeper[index1 - i][index2 - j] == 0) {
+			showingMS[index1 - i][index2 - j] = true;
+			if (index1 - i + 1 < mineSweeper.length) {
+				showingMS[index1 - i + 1][index2 - j] = true;
+			}
+			if (index1 - i + 1 < mineSweeper.length && index2 - j + 1 < mineSweeper[i].length) {
+				showingMS[index1 - i + 1][index2 - j + 1] = true;
+			}
+			if (index1 - i + 1 < mineSweeper.length && index2 - j - 1 >= 0) {
+				showingMS[index1 - i + 1][index2 - j - 1] = true;
+			}
+			if (index1 - i - 1 >= 0) {
+				showingMS[index1 - i - 1][index2 - j] = true;
+			}
+			if (index1 - i - 1 >= 0 && index2 - j + 1 < mineSweeper[i].length) {
+				showingMS[index1 - i - 1][index2 - j + 1] = true;
+			}
+			if (index1 - i - 1 >= 0 && index2 - j - 1 >= 0) {
+				showingMS[index1 - i - 1][index2 - j - 1] = true;
+			}
+			if (index2 - j + 1 < mineSweeper[i].length) {
+				showingMS[index1 - i][index2 - j + 1] = true;
+			}
+			if (index2 - j - 1 >= 0) {
+				showingMS[index1 - i][index2 - j - 1] = true;
+			}
+		}
+		return showingMS;
 	}
 
 }

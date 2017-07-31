@@ -32,6 +32,7 @@ public class MinesweeperTable {
 	}
 	
 	//Method for random outputs
+	//Add worst odds for higher levels
 	private static int randomNumbers() {
 		
 		//Might need to changes odds to change the number of mines
@@ -48,7 +49,6 @@ public class MinesweeperTable {
 	//Method for putting numbers in places with no mines based on number of mines around place
 	private static int[][] addsNumbers(int[][] mineSweeper) {
 		
-		//Break up for loops into different methods maybe
 		for (int i = 0; i < mineSweeper.length; i++) {
 			for (int j = 0; j < mineSweeper[i].length; j++) {
 				if (mineSweeper[i][j] == 10) {
