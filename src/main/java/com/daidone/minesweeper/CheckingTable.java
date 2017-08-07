@@ -52,5 +52,69 @@ public class CheckingTable {
 		}
 		return false;
 	}
+	
+	public static boolean arrayMinusiMinus (int index1, int i) {
+		
+		if (index1 - i - 1 >= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayMinusiPlus (int[][] mineSweeper, int index1, int i) {
+		
+		if (index1 - i + 1 < mineSweeper.length) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayPlusiPlus (int[][] mineSweeper, int index1, int i) {
+		
+		if (index1 + i + 1 < mineSweeper.length) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayPlusiMinus (int index1, int i) {
+		
+		if (index1 + i - 1 >= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayMinusjMinus (int index2, int j) {
+		
+		if (index2 - j - 1 >= 0) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayMinusjPlus (int[][] mineSweeper, int index2, int j, int k) {
+		
+		if (index2 - j + 1 < mineSweeper[k].length) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayPlusjPlus (int[][] mineSweeper, int index2, int j, int k) {
+		
+		if (index2 + j + 1 < mineSweeper[k].length) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean arrayPlusjMinus (int index2, int j) {
+		
+		if (index2 + j - 1 >= 0) {
+			return true;
+		}
+		return false;
+	}
 
 }
