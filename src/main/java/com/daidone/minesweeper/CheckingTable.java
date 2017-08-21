@@ -53,6 +53,16 @@ public class CheckingTable {
 		return false;
 	}
 	
+	public static boolean notZero (HttpServletRequest request, HttpSession session) {
+		
+		if (((int[][]) session.getAttribute("mineSweeper"))[Integer.parseInt(
+				request.getParameter("index1"))][Integer.parseInt(request.getParameter(
+				"index2"))] == 0) {
+			return false;
+		}
+		return true;
+	}
+	
 	public static boolean arrayMinusiMinus (int index1, int i) {
 		
 		if (index1 - i - 1 >= 0) {
