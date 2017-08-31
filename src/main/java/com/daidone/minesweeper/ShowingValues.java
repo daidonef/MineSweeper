@@ -33,6 +33,10 @@ public class ShowingValues {
 			if (CheckingTable.zero(request, session)) {
 				changingForZero(request, session);
 			}
+			if (CheckingTable.win(request, session)) {
+				showingAll(session);
+				model.addAttribute("result", "You win!");
+			}
 		}
 		MinesweeperTable.addingModelSession(model, session, (int[][]) session.getAttribute(
 				"mineSweeper"), (boolean[][]) session.getAttribute("showingMS"));
@@ -284,154 +288,6 @@ public class ShowingValues {
 				request.getParameter("index2"))] = true;
 		
 		session.setAttribute("showingMS", showingMS);
-	}
-	
-	private static boolean[][] changingZerosPlusPlus(int index1, int index2, int i, int j,
-			int[][] mineSweeper, boolean[][] showingMS) {
-		
-		if (mineSweeper[index1 + i][index2 + j] == 0) {
-			showingMS[index1 + i][index2 + j] = true;
-			if (CheckingTable.arrayPlusiPlus(mineSweeper, index1, i)) {
-				showingMS[index1 + i + 1][index2 + j] = true;
-			}
-			if (CheckingTable.arrayPlusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayPlusjPlus(mineSweeper, index2, j, index1 + i + 1)) {
-				showingMS[index1 + i + 1][index2 + j + 1] = true;
-			}
-			if (CheckingTable.arrayPlusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayPlusjMinus(index2, j)) {
-				showingMS[index1 + i + 1][index2 + j - 1] = true;
-			}
-			if (CheckingTable.arrayPlusiMinus(index1, i)) {
-				showingMS[index1 + i - 1][index2 + j] = true;
-			}
-			if (CheckingTable.arrayPlusiMinus(index1, i) && 
-					CheckingTable.arrayPlusjPlus(mineSweeper, index2, j, index1 + i - 1)) {
-				showingMS[index1 + i - 1][index2 + j + 1] = true;
-			}
-			if (CheckingTable.arrayPlusiMinus(index1, i) && 
-					CheckingTable.arrayPlusjMinus(index2, j)) {
-				showingMS[index1 + i - 1][index2 + j - 1] = true;
-			}
-			if (CheckingTable.arrayPlusjPlus(mineSweeper, index2, j, index1 + i)) {
-				showingMS[index1 + i][index2 + j + 1] = true;
-			}
-			if (CheckingTable.arrayPlusjMinus(index2, j)) {
-				showingMS[index1 + i][index2 + j - 1] = true;
-			}
-		}
-		return showingMS;
-	}
-	
-	private static boolean[][] changingZerosPlusMinus(int index1, int index2, int i, int j,
-			int[][] mineSweeper, boolean[][] showingMS) {
-		
-		if (mineSweeper[index1 + i][index2 - j] == 0) {
-			showingMS[index1 + i][index2 - j] = true;
-			if (CheckingTable.arrayPlusiPlus(mineSweeper, index1, i)) {
-				showingMS[index1 + i + 1][index2 - j] = true;
-			}
-			if (CheckingTable.arrayPlusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayMinusjPlus(mineSweeper, index2, j, index1 + i + 1)) {
-				showingMS[index1 + i + 1][index2 - j + 1] = true;
-			}
-			if (CheckingTable.arrayPlusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayMinusjMinus(index2, j)) {
-				showingMS[index1 + i + 1][index2 - j - 1] = true;
-			}
-			if (CheckingTable.arrayPlusiMinus(index1, i)) {
-				showingMS[index1 + i - 1][index2 - j] = true;
-			}
-			if (CheckingTable.arrayPlusiMinus(index1, i) && 
-					CheckingTable.arrayMinusjPlus(mineSweeper, index2, j, index1 + i - 1)) {
-				showingMS[index1 + i - 1][index2 - j + 1] = true;
-			}
-			if (CheckingTable.arrayPlusiMinus(index1, i) && 
-					CheckingTable.arrayMinusjMinus(index2, j)) {
-				showingMS[index1 + i - 1][index2 - j - 1] = true;
-			}
-			if (CheckingTable.arrayMinusjPlus(mineSweeper, index2, j, index1 + i)) {
-				showingMS[index1 + i][index2 - j + 1] = true;
-			}
-			if (CheckingTable.arrayMinusjMinus(index2, j)) {
-				showingMS[index1 + i][index2 - j - 1] = true;
-			}
-		}
-		return showingMS;
-	}
-	
-	private static boolean[][] changingZerosMinusPlus(int index1, int index2, int i, int j,
-			int[][] mineSweeper, boolean[][] showingMS) {
-		
-		if (mineSweeper[index1 - i][index2 + j] == 0) {
-			showingMS[index1 - i][index2 + j] = true;
-			if (CheckingTable.arrayMinusiPlus(mineSweeper, index1, i)) {
-				showingMS[index1 - i + 1][index2 + j] = true;
-			}
-			if (CheckingTable.arrayMinusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayPlusjPlus(mineSweeper, index2, j, index1 - i + 1)) {
-				showingMS[index1 - i + 1][index2 + j + 1] = true;
-			}
-			if (CheckingTable.arrayMinusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayPlusjMinus(index2, j)) {
-				showingMS[index1 - i + 1][index2 + j - 1] = true;
-			}
-			if (CheckingTable.arrayMinusiMinus(index1, i)) {
-				showingMS[index1 - i - 1][index2 + j] = true;
-			}
-			if (CheckingTable.arrayMinusiMinus(index1, i) && 
-					CheckingTable.arrayPlusjPlus(mineSweeper, index2, j, index1 - i - 1)) {
-				showingMS[index1 - i - 1][index2 + j + 1] = true;
-			}
-			if (CheckingTable.arrayMinusiMinus(index1, i) && 
-					CheckingTable.arrayPlusjMinus(index2, j)) {
-				showingMS[index1 - i - 1][index2 + j - 1] = true;
-			}
-			if (CheckingTable.arrayPlusjPlus(mineSweeper, index2, j, index1 - i)) {
-				showingMS[index1 - i][index2 + j + 1] = true;
-			}
-			if (CheckingTable.arrayPlusjMinus(index2, j)) {
-				showingMS[index1 - i][index2 + j - 1] = true;
-			}
-		}
-		return showingMS;
-	}
-	
-	private static boolean[][] changingZerosMinusMinus(int index1, int index2, int i, int j,
-			int[][] mineSweeper, boolean[][] showingMS) {
-		
-		if (mineSweeper[index1 - i][index2 - j] == 0) {
-			showingMS[index1 - i][index2 - j] = true;
-			if (CheckingTable.arrayMinusiPlus(mineSweeper, index1, i)) {
-				showingMS[index1 - i + 1][index2 - j] = true;
-			}
-			if (CheckingTable.arrayMinusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayMinusjPlus(mineSweeper, index2, j, index1 - i + 1)) {
-				showingMS[index1 - i + 1][index2 - j + 1] = true;
-			}
-			if (CheckingTable.arrayMinusiPlus(mineSweeper, index1, i) && 
-					CheckingTable.arrayMinusjMinus(index2, j)) {
-				showingMS[index1 - i + 1][index2 - j - 1] = true;
-			}
-			if (CheckingTable.arrayMinusiMinus(index1, i)) {
-				showingMS[index1 - i - 1][index2 - j] = true;
-			}
-			if (CheckingTable.arrayMinusiMinus(index1, i) && 
-					CheckingTable.arrayMinusjPlus(mineSweeper, index2, j, index1 - i - 1)) {
-				showingMS[index1 - i - 1][index2 - j + 1] = true;
-			}
-			if (CheckingTable.arrayMinusiMinus(index1, i) && 
-					CheckingTable.arrayMinusjMinus(index2, j)) {
-				showingMS[index1 - i - 1][index2 - j - 1] = true;
-			}
-			if (CheckingTable.arrayMinusjPlus(mineSweeper, index2, j, index1 - i)) {
-				showingMS[index1 - i][index2 - j + 1] = true;
-			}
-			if (CheckingTable.arrayMinusjMinus(index2, j)) {
-				showingMS[index1 - i][index2 - j - 1] = true;
-			}
-		}
-		return showingMS;
 	}
 	
 }
