@@ -11,21 +11,37 @@ public class MinesweeperTable {
 	
 	//Method to generate minesweeper table in 2d array
 	public static void generatingMSTable(Model model, HttpSession session) {
-		addingModelSession(model, session, addsNumbers(generateMines()), generatingShowingMS());
+		addingModelSession(model, session, addsNumbers(generateMines(session)), 
+				generatingShowingMS(session));
 	}
 	
 	//Method get random mines for 2d array, higher level get more mines
 	//Uses 10 for the mine
-	private static int[][] generateMines() {
+	private static int[][] generateMines(HttpSession session) {
 		
 		//Add bigger array for higher level after base game is finished
-		int rows = 10;
-		int columns = 10;
+		int rows;
+		int columns;
+		
+		if ((Integer) session.getAttribute("nextLevel") == 1) {
+			rows = 10;
+			columns = 10;
+		} else if ((Integer) session.getAttribute("nextLevel") == 2) {
+			rows = 12;
+			columns = 12;
+		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
+			rows = 15;
+			columns = 15;
+		} else {
+			rows = 20;
+			columns = 20;
+		}
+		
 		int[][] mineSweeper = new int[rows][columns];
 		
 		for (int i = 0; i < mineSweeper.length; i++) {
 			for (int j = 0; j < mineSweeper[i].length; j++) {
-				mineSweeper[i][j] = randomNumbers();
+				mineSweeper[i][j] = randomNumbers(session);
 			}
 		}
 		return mineSweeper;
@@ -33,11 +49,21 @@ public class MinesweeperTable {
 	
 	//Method for random outputs
 	//Add worst odds for higher levels
-	private static int randomNumbers() {
+	private static int randomNumbers(HttpSession session) {
 		
 		//Might need to changes odds to change the number of mines
 		Random random = new Random();
-		int randomNumber = random.nextInt(15);
+		int randomNumber;
+		
+		if ((Integer) session.getAttribute("nextLevel") == 1) {
+			randomNumber = random.nextInt(15);
+		} else if ((Integer) session.getAttribute("nextLevel") == 2) {
+			randomNumber = random.nextInt(13);
+		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
+			randomNumber = random.nextInt(10);
+		} else {
+			randomNumber = random.nextInt(9);
+		}
 		
 		if (randomNumber == 0) {
 			return 10;
@@ -99,11 +125,26 @@ public class MinesweeperTable {
 	}
 	
 	//Method for generating 2d array with all boolean values false
-	private static boolean[][] generatingShowingMS() {
+	private static boolean[][] generatingShowingMS(HttpSession session) {
 		
 		//Add bigger array for higher level after base game is finished
-		int rows = 10;
-		int columns = 10;
+		int rows;
+		int columns;
+		
+		if ((Integer) session.getAttribute("nextLevel") == 1) {
+			rows = 10;
+			columns = 10;
+		} else if ((Integer) session.getAttribute("nextLevel") == 2) {
+			rows = 12;
+			columns = 12;
+		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
+			rows = 15;
+			columns = 15;
+		} else {
+			rows = 20;
+			columns = 20;
+		}
+		
 		boolean[][] showingMS = new boolean[rows][columns];
 		
 		for (int i = 0; i < showingMS.length; i++) {

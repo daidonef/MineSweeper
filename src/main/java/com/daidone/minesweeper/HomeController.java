@@ -22,8 +22,20 @@ public class HomeController {
 		
 		HttpSession session = request.getSession(true);
 		
-		//Random minesweep table generated on first load of page
+		//Need to figure out why it is not getting past level 1
 		if (request.getParameter("index1") == null) {
+			//To increase level of difficult for user
+			if (request.getParameter("nextLevel") == null) {
+				session.setAttribute("nextLevel", 1);
+			} else {
+				session.setAttribute("nextLevel", (Integer) session.getAttribute("nextLevel")
+						+ 1);
+			}
+		}
+		
+		//Random minesweeper table generated on first load of page
+		if (request.getParameter("index1") == null || Boolean.getBoolean((String) request
+				.getParameter("startOver"))) {
 			MinesweeperTable.generatingMSTable(model, session);
 		} else {
 			//After first load will use that table and user input to see if player loses or not

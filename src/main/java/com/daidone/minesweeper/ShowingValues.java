@@ -19,11 +19,13 @@ public class ShowingValues {
 		if (results == 2) {
 			showingAll(session);
 			model.addAttribute("result", "You lose!");
+			model.addAttribute("result2", 0);
 		}
 		//If player wins
 		if (results == 1) {
 			showingAll(session);
 			model.addAttribute("result", "You win!");
+			model.addAttribute("result2", 1);
 		}
 		//If player keeps going
 		if (results == 0) {
@@ -36,6 +38,7 @@ public class ShowingValues {
 			if (CheckingTable.win(request, session)) {
 				showingAll(session);
 				model.addAttribute("result", "You win!");
+				model.addAttribute("result2", 1);
 			}
 		}
 		MinesweeperTable.addingModelSession(model, session, (int[][]) session.getAttribute(

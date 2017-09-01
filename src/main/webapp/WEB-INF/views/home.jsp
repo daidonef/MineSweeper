@@ -31,5 +31,21 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<p>
+		<c:if test="${result2 == 0}">
+			<form name="startOver" action="http://localhost:8080/minesweeper/" method="get">
+				<input type="hidden" name="startOver" value="True">
+				
+				<input type="submit" value="Start Over">
+			</form>
+		</c:if>
+		<c:if test="${result2 == 1}">
+			<form name="nextLevel" action="http://localhost:8080/minesweeper/" method="get">
+				<input type="hidden" name="nextLevel" value="True">
+				
+				<input type="submit" value="Next Level">
+			</form>
+		</c:if>
+	</p>
 </body>
 </html>
