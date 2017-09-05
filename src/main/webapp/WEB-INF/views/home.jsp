@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>Minesweeper</title>
+	<link rel="stylesheet" href="resources/style.css">
 </head>
 <body>
 <h1>
@@ -15,15 +16,29 @@
 			<tr>
 				<c:forEach items="${i }" var="j" varStatus="status2">
 					<c:if test="${showingMS[status1.index][status2.index] }">
-						<td>${j }</td>
+						<c:if test="${j == 10}">
+							<td>
+								<img src="http://www.rw-designer.com/icon-image/3078-48x48x32.png" 
+								alt="Mine" style="width:16px;height:16px;">
+							</td>
+						</c:if>
+						<c:if test="${j < 10 && j > 0}">
+							<td>
+								${j }
+							</td>
+						</c:if>
+						<c:if test="${j == 0}">
+							<td>
+							</td>
+						</c:if>
 					</c:if>
 					<c:if test="${showingMS[status1.index][status2.index] == false}">
 						<td>
-							<form name="choice" action="http://localhost:8080/minesweeper/" method="get">
+							<form name="choice" class="mines" action="http://localhost:8080/minesweeper/" method="get">
 								<input type="hidden" name="index1" value="${status1.index}">
 								<input type="hidden" name="index2" value="${status2.index}">
 
-								<input type="submit" class="inside" value="Choice">
+								<input type="submit" class="inside" value="">
 							</form>
 						</td>
 					</c:if>
