@@ -61,8 +61,16 @@ public class MinesweeperTable {
 			randomNumber = random.nextInt(13);
 		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
 			randomNumber = random.nextInt(10);
-		} else {
+		} else if ((Integer) session.getAttribute("nextLevel") == 4) {
 			randomNumber = random.nextInt(9);
+		} else if ((Integer) session.getAttribute("nextLevel") == 5) {
+			randomNumber = random.nextInt(8);
+		} else if ((Integer) session.getAttribute("nextLevel") == 6) {
+			randomNumber = random.nextInt(7);
+		} else if ((Integer) session.getAttribute("nextLevel") == 7) {
+			randomNumber = random.nextInt(6);
+		} else {
+			randomNumber = random.nextInt(5);
 		}
 		
 		if (randomNumber == 0) {
@@ -140,10 +148,22 @@ public class MinesweeperTable {
 		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
 			rows = 15;
 			columns = 15;
-		} else {
+		} else if ((Integer) session.getAttribute("nextLevel") == 4) {
 			rows = 20;
 			columns = 20;
-		}
+		} else if ((Integer) session.getAttribute("nextLevel") == 5) {
+			rows = 25;
+			columns = 25;
+		} else if ((Integer) session.getAttribute("nextLevel") == 6) {
+			rows = 27;
+			columns = 27;
+		} else if ((Integer) session.getAttribute("nextLevel") == 7) {
+			rows = 30;
+			columns = 30;
+		} else {
+			rows = 35;
+			columns = 35;
+		} 
 		
 		boolean[][] showingMS = new boolean[rows][columns];
 		

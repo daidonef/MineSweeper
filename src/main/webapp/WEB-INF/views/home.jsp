@@ -9,7 +9,7 @@
 <h1>
 	Minesweeper  
 </h1>
-<p>${result }</p>
+<p class="result">${result }</p>
 <!-- Create bottoms for each to send information to the HomeController -->
 	<table>
 		<c:forEach items="${mineSweeper }" var="i" varStatus="status1">
@@ -48,17 +48,17 @@
 	</table>
 	<p>
 		<c:if test="${result2 == 0}">
-			<form name="startOver" action="http://localhost:8080/minesweeper/" method="get">
+			<form name="startOver" class="insideForms" action="http://localhost:8080/minesweeper/" method="get">
 				<input type="hidden" name="startOver" value="True">
 				
-				<input type="submit" value="Start Over">
+				<input type="submit" class="insideForms2" value="Start Over">
 			</form>
 		</c:if>
 		<c:if test="${result2 == 1}">
-			<form name="nextLevel" action="http://localhost:8080/minesweeper/" method="get">
+			<form name="nextLevel" class="insideForms" action="http://localhost:8080/minesweeper/" method="get">
 				<input type="hidden" name="nextLevel" value="True">
 				
-				<input type="submit" value="Next Level">
+				<input type="submit" class="insideForms2" value="Next Level">
 			</form>
 		</c:if>
 	</p>
