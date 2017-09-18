@@ -9,7 +9,7 @@
 <h1>
 	Minesweeper  
 </h1>
-<p class="result">${result }</p>
+<p class="result">Level ${level} ${result }</p>
 <!-- Create bottoms for each to send information to the HomeController -->
 	<table>
 		<c:forEach items="${mineSweeper }" var="i" varStatus="status1">

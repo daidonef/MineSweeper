@@ -23,18 +23,32 @@ public class MinesweeperTable {
 		int rows;
 		int columns;
 		
-		if ((Integer) session.getAttribute("nextLevel") == 1) {
+		int level = (Integer) session.getAttribute("nextLevel");
+		
+		if (level == 1) {
 			rows = 10;
 			columns = 10;
-		} else if ((Integer) session.getAttribute("nextLevel") == 2) {
+		} else if (level == 2) {
 			rows = 12;
 			columns = 12;
-		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
+		} else if (level == 3) {
 			rows = 15;
 			columns = 15;
-		} else {
+		} else if (level == 4) {
 			rows = 20;
 			columns = 20;
+		} else if (level == 5) {
+			rows = 25;
+			columns = 25;
+		} else if (level == 6) {
+			rows = 27;
+			columns = 27;
+		} else if (level == 7) {
+			rows = 30;
+			columns = 30;
+		} else {
+			rows = 35;
+			columns = 35;
 		}
 		
 		int[][] mineSweeper = new int[rows][columns];
@@ -138,26 +152,27 @@ public class MinesweeperTable {
 		//Add bigger array for higher level after base game is finished
 		int rows;
 		int columns;
+		int level = (Integer) session.getAttribute("nextLevel");
 		
-		if ((Integer) session.getAttribute("nextLevel") == 1) {
+		if (level == 1) {
 			rows = 10;
 			columns = 10;
-		} else if ((Integer) session.getAttribute("nextLevel") == 2) {
+		} else if (level == 2) {
 			rows = 12;
 			columns = 12;
-		} else if ((Integer) session.getAttribute("nextLevel") == 3) {
+		} else if (level == 3) {
 			rows = 15;
 			columns = 15;
-		} else if ((Integer) session.getAttribute("nextLevel") == 4) {
+		} else if (level == 4) {
 			rows = 20;
 			columns = 20;
-		} else if ((Integer) session.getAttribute("nextLevel") == 5) {
+		} else if (level == 5) {
 			rows = 25;
 			columns = 25;
-		} else if ((Integer) session.getAttribute("nextLevel") == 6) {
+		} else if (level == 6) {
 			rows = 27;
 			columns = 27;
-		} else if ((Integer) session.getAttribute("nextLevel") == 7) {
+		} else if (level == 7) {
 			rows = 30;
 			columns = 30;
 		} else {

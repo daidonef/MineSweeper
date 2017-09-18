@@ -41,6 +41,8 @@ public class HomeController {
 			//After first load will use that table and user input to see if player loses or not
 			ShowingValues.displayingTable(model, request, session);
 		}
+		
+		model.addAttribute("level", session.getAttribute("nextLevel"));
 
 		return "home";
 	}
